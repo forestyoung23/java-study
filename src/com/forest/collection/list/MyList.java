@@ -14,16 +14,18 @@ public class MyList<E> implements List<E> {
         element = new Object[DEFAULT_CAPACITY];
     }
 
+    /**
+     * 数组初始大小：10
+     */
     private static final Integer DEFAULT_CAPACITY = 10;
 
     private int size = 0;
 
-    @Override
+
     public int size() {
         return size;
     }
 
-    @Override
     public boolean isEmpty() {
         if (0 == size()) {
             return true;
@@ -60,6 +62,14 @@ public class MyList<E> implements List<E> {
         }
     }
 
+    /**
+     * 指定位置添加元素
+     *
+     * @param index,data
+     * @return
+     * @author Forest
+     * @date 2020/5/11 12:22 上午
+     */
     @Override
     public boolean add(int index, Object data) {
         checkSize();
@@ -69,6 +79,14 @@ public class MyList<E> implements List<E> {
         return true;
     }
 
+    /**
+     * 通过下标获取元素
+     *
+     * @param index
+     * @return
+     * @author Forest
+     * @date 2020/5/11 12:22 上午
+     */
     @Override
     public E get(int index) {
         return (E) element[index];
@@ -90,6 +108,7 @@ public class MyList<E> implements List<E> {
     }
 
     public static void main(String[] args) {
+        // 右移一位
         int i = 13 >> 1;
         System.err.println(i);
     }

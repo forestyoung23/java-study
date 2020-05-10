@@ -28,7 +28,7 @@ public interface List<E> {
     /**
      * 添加元素
      * 
-     * @param 
+     * @param data
      * @return 
      * @author Forest
      * @date 2020/4/30 10:16
@@ -38,7 +38,7 @@ public interface List<E> {
     /**
      * 指定位置添加元素
      * 
-     * @param 
+     * @param index,data
      * @return 
      * @author Forest
      * @date 2020/4/30 10:17
@@ -48,7 +48,7 @@ public interface List<E> {
     /**
      * 获取指定位置的元素
      * 
-     * @param 
+     * @param index
      * @return 
      * @author Forest
      * @date 2020/4/30 10:21

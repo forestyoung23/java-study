@@ -4,7 +4,7 @@ package com.forest.concurrency;
 import java.util.function.Consumer;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年06月23日 14:07
  */
 public class TaskBufferUtil {

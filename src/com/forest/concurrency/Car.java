@@ -13,7 +13,7 @@ public class Car {
     private String type;
     private Size size;
     @Data
-    public static class Size {
+    public class Size {
         private Integer length;
         private Integer width;
         private List<Nmd> nmd;

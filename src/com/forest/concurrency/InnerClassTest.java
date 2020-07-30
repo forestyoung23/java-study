@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class InnerClassTest {
     public static void main(String[] args) throws IOException {
-        String json = "{\n" +
+         String json = "{\n" +
                 "    \"type\": \"bba\",\n" +
                 "    \"size\": {\n" +
                 "        \"length\": 5,\n" +
@@ -25,6 +25,5 @@ public class InnerClassTest {
         // Car car = JSONObject.parseObject(json, Car.class);
         ObjectMapper objectMapper = new ObjectMapper();
         Car car = objectMapper.readValue(json, Car.class);
-        System.err.println(car);
     }
 }

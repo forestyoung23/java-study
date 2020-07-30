@@ -22,10 +22,12 @@ public class MyList<E> implements List<E> {
     private int size = 0;
 
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         if (0 == size()) {
             return true;

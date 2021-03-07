@@ -4,7 +4,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年11月03日 17:10
  */
 public class FunctionTest {

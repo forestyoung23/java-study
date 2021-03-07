@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年11月03日 15:21
  */
 public class PredicateTest {

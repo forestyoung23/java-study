@@ -1,7 +1,7 @@
 package com.forest.designpatterns.adapter;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年07月30日 08:49
  */
 public class Output220 {

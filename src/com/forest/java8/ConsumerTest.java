@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年11月03日 14:29
  */
 public class ConsumerTest {

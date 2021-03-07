@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
- * @author dongyang
+ * @author Forest
  * @date 2020年11月03日 15:04
  */
 public class SupplierTest {

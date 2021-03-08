@@ -8,7 +8,7 @@ import java.util.Stack;
  * 栈：先进后出
  * 队列：先进先出
  * 思路：利用栈的特点，先进后出，定义两个栈inStack和outStack，入栈到inStack，
- *      那么最先入的就在最下面，出栈时，将inStack栈顶元素一个个移到outStack，这时对于
+ *      那么最先入的就在栈底，出栈时，将inStack栈顶元素一个个移到outStack，这时对于
  *      outStack，最先入inStack的元素就被移到了outStack的栈顶，这时从outStack栈顶
  *      出，就实现了队列的先进先出
  *

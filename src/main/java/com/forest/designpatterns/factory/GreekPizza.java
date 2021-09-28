@@ -5,6 +5,11 @@ package com.forest.designpatterns.factory;
  * @date 2020年07月28日 00:01
  */
 public class GreekPizza implements Pizza {
+    public GreekPizza() {
+    }
+
+    private String str = "324sadfsddf";
+
     @Override
     public void prepare() {
         System.err.println("prepare");
@@ -23,5 +28,12 @@ public class GreekPizza implements Pizza {
     @Override
     public void pack() {
         System.err.println("pack");
+    }
+
+    @Override
+    public String toString() {
+        return "GreekPizza{" +
+                "str='" + str + '\'' +
+                '}';
     }
 }

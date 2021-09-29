@@ -6,7 +6,7 @@ package com.forest.designpatterns.factory.abstractfactory;
  * @author Forest
  * @date 2020年07月28日 00:17
  */
-public class FactoryBuilder {
+public class  FactoryBuilder {
     private AbstractFactory getFactory(String type) {
         if ("BJ".equals(type)) {
             return new BJFactory();

@@ -10,7 +10,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Forest Dong
  * @date 2021年09月28日 10:37
  */
-public class SingletonFactory<T> {
+public class SingletonFactory {
 
     public static synchronized <T> T getSingleton(Class<T> clazz) {
         try {

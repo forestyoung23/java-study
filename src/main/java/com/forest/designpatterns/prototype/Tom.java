@@ -7,7 +7,7 @@ package com.forest.designpatterns.prototype;
  */
 public class Tom implements Cloneable {
     public int age;
-    public String sizw;
+    public String size;
     @Override
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
@@ -17,7 +17,7 @@ public class Tom implements Cloneable {
     public String toString() {
         return "Tom{" +
                 "age=" + age +
-                ", sizw='" + sizw + '\'' +
+                ", sizw='" + size + '\'' +
                 '}';
     }
 }

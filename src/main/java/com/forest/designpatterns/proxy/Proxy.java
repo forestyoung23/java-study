@@ -7,7 +7,7 @@ package com.forest.designpatterns.proxy;
  * @date 2021年10月06日 11:23
  */
 public class Proxy implements Subject {
-    private Subject subject = null;
+    private Subject subject;
 
     public Proxy(Subject subject) {
         this.subject = subject;

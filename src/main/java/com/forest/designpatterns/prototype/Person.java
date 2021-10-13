@@ -2,6 +2,8 @@ package com.forest.designpatterns.prototype;
 
 
 /**
+ * 原型模式
+ *
  * @author Forest
  * @date 2020年07月28日 00:43
  */

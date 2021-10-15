@@ -1,6 +1,5 @@
 package com.forest.designpatterns.adapter.objectadapter;
 
-import com.forest.designpatterns.adapter.Target;
 
 /**
  * 对象适配器

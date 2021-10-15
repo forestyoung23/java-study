@@ -9,12 +9,12 @@ import java.util.Vector;
  * @date 2021年10月15日 11:41
  */
 public class ConcreteIterator implements Iterator {
-    private Vector vector = new Vector();
+    private Vector vector;
 
     /**
      * 定义当前游标
      */
-    public int cursor = 0;
+    private int cursor = 0;
 
     public  ConcreteIterator(Vector vector) {
         this.vector = vector;

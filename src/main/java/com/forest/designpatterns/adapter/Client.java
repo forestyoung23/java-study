@@ -1,6 +1,8 @@
 package com.forest.designpatterns.adapter;
 
 /**
+ * 场景类
+ *
  * @author Forest Dong
  * @date 2021年10月14日 18:05
  */

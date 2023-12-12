@@ -8,9 +8,9 @@ package com.forest.algorithm;
  */
 public class LinkedListStack<T> {
     /**
-     * 头节点
+     * 头节点作为栈顶
      */
-    private ListNode<T> node;
+    private ListNode<T> stackTop;
 
     /**
      * 栈元素数量
@@ -47,11 +47,9 @@ public class LinkedListStack<T> {
      * @date 2023/12/12 19:43
      */
     public void push(T e) {
-        if (null == node) {
-            node = new ListNode<>(e, null);
-        } else {
-            node = new ListNode<>(e, node);
-        }
+        ListNode<T> node = new ListNode<>(e);
+        node.next = stackTop;
+        stackTop = node;
         size++;
     }
 
@@ -63,15 +61,8 @@ public class LinkedListStack<T> {
      * @date 2023/12/12 19:43
      */
     public T pop() {
-        if (null == node) {
-            return null;
-        }
-        T result = node.value;
-        if (null == node.next) {
-            node = null;
-        } else {
-            node = node.next;
-        }
+        T result = peek();
+        stackTop = stackTop.next;
         size--;
         return result;
     }
@@ -84,16 +75,20 @@ public class LinkedListStack<T> {
      * @date 2023/12/12 19:44
      */
     public T peek() {
-        if (null == node) {
-            return null;
+        if (isEmpty()) {
+            throw new IndexOutOfBoundsException();
         }
-        return node.value;
+        return stackTop.value;
     }
 
     private static class ListNode<T> {
-        private final T value;
+        private T value;
 
         private ListNode<T> next;
+
+        public ListNode(T value) {
+            this.value = value;
+        }
 
         public ListNode(T value, ListNode<T> next) {
             this.value = value;

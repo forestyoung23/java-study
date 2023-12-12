@@ -1,4 +1,4 @@
-package com.forest.algorithm;
+package com.forest.algorithm.stack;
 
 /**
  * 使用链表实现栈

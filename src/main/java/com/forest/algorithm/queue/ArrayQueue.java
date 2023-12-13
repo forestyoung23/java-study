@@ -40,6 +40,7 @@ public class ArrayQueue<T> {
      * @date 2023/12/12 19:43
      */
     public void push(T e) {
+        list.add(e);
     }
 
     /**
@@ -50,7 +51,9 @@ public class ArrayQueue<T> {
      * @date 2023/12/12 19:43
      */
     public T pop() {
-        return null;
+        T result = peek();
+        list.remove(0);
+        return result;
     }
 
     /**
@@ -61,6 +64,28 @@ public class ArrayQueue<T> {
      * @date 2023/12/12 19:44
      */
     public T peek() {
-        return null;
+        if (0 == size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        return list.get(0);
+    }
+
+    public static void main(String[] args) {
+        ArrayQueue<Integer> queue = new ArrayQueue<>();
+        System.err.println("当前栈是否为空:" + queue.isEmpty());
+        System.err.println("当前栈元素个数:" + queue.size());
+        queue.push(1);
+        queue.push(2);
+        queue.push(3);
+        System.err.println("当前栈是否为空:" + queue.isEmpty());
+        System.err.println("当前栈元素个数:" + queue.size());
+        System.err.println("peek第一个元素,元素值为:" + queue.peek() + ",peek后元素个数为:" + queue.size());
+        System.err.println("pop第一个元素,元素值为:" + queue.pop() + ",pop后元素个数为:" + queue.size());
+        System.err.println("peek第二个元素,元素值为:" + queue.peek() + ",peek后元素个数为:" + queue.size());
+        System.err.println("pop第二个元素,元素值为:" + queue.pop() + ",pop后元素个数为:" + queue.size());
+        System.err.println("peek第三个元素,元素值为:" + queue.peek() + ",peek后元素个数为:" + queue.size());
+        System.err.println("pop第三个元素,元素值为:" + queue.pop() + ",pop后元素个数为:" + queue.size());
+        System.err.println("peek第四个元素,元素值为:" + queue.peek() + ",peek后元素个数为:" + queue.size());
+        System.err.println("pop第四个元素,元素值为:" + queue.pop() + ",pop后元素个数为:" + queue.size());
     }
 }

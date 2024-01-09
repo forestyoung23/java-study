@@ -1,4 +1,4 @@
-package com.forest.algorithm.common;
+package com.forest.algorithm.tree;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,4 +26,8 @@ public class BinaryTreeNode {
      * 右节点
      */
     private BinaryTreeNode right;
+
+    public BinaryTreeNode(int value) {
+        this.value = value;
+    }
 }

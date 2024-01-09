@@ -1,30 +1,39 @@
-package com.forest.algorithm.dfs;
+package com.forest.algorithm.tree.dfs;
 
-import com.forest.algorithm.common.BinaryTreeNode;
+import com.forest.algorithm.tree.BinaryTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Stack;
 
 /**
- * 以二叉树为例使用递归实现DFS算法
+ * 以二叉树为例使用栈实现DFS算法
  *
- * @author Forest
- * @date 2021年03月07日 14:35
+ * @author dongyang
+ * @date 2021年03月07日 14:50
  */
-public class RecursionDFS {
+public class StackDFS {
     private List<Integer> list = new ArrayList<>();
-
     public void dfs(BinaryTreeNode node) {
         if (null == node) {
             return;
         }
-        // 逻辑处理
-        process(node);
-        // 遍历左节点
-        dfs(node.getLeft());
-        // 遍历右节点
-        dfs(node.getRight());
+        Stack<BinaryTreeNode> stack = new Stack<>();
+        // 根节点压栈
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            BinaryTreeNode pop = stack.pop();
+            // 逻辑处理
+            process(pop);
+
+
+            if (null != pop.getRight()) {
+                stack.push(pop.getRight());
+            }
+            if (null != pop.getLeft()) {
+                stack.push(pop.getLeft());
+            }
+        }
     }
 
     /**
@@ -41,19 +50,6 @@ public class RecursionDFS {
         list.add(currentNode.getValue());
     }
 
-    /**
-     * 以下面二叉树为例
-     *      1
-     *     / \
-     *    3   2
-     *   / \
-     *  5   6
-     *
-     * @param
-     * @return
-     * @author dongyang
-     * @date 2021/3/7 下午3:26
-     */
     public static void main(String[] args) {
         BinaryTreeNode node5 = new BinaryTreeNode();
         node5.setValue(5);
@@ -63,7 +59,7 @@ public class RecursionDFS {
         BinaryTreeNode node2 = new BinaryTreeNode();
         node2.setValue(2);
         BinaryTreeNode node1= new BinaryTreeNode(1, node3, node2);
-        RecursionDFS dfs = new RecursionDFS();
+        StackDFS dfs = new StackDFS();
         dfs.dfs(node1);
         System.out.println(dfs.list);
     }

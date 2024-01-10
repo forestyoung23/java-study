@@ -15,16 +15,64 @@ import java.util.List;
 public class RecursionDFS {
     private List<Integer> list = new ArrayList<>();
 
-    public void dfs(BinaryTreeNode node) {
+    /**
+     * 前序遍历
+     *
+     * @param node
+     * @author Forest Dong
+     * @date 2024/01/10 19:50
+     */
+    public void preOrder(BinaryTreeNode node) {
         if (null == node) {
             return;
         }
+        // 访问优先级：根节点 -> 左子树 -> 右子树
         // 逻辑处理
         process(node);
         // 遍历左节点
-        dfs(node.getLeft());
+        preOrder(node.getLeft());
         // 遍历右节点
-        dfs(node.getRight());
+        preOrder(node.getRight());
+    }
+
+    /**
+     * 中序遍历
+     *
+     * @param node
+     * @author Forest Dong
+     * @date 2024/01/10 19:50
+     */
+    public void inOrder(BinaryTreeNode node) {
+        if (null == node) {
+            return;
+        }
+        // 访问优先级：左子树 -> 根节点 -> 右子树
+        // 遍历左节点
+        inOrder(node.getLeft());
+        // 逻辑处理
+        process(node);
+        // 遍历右节点
+        inOrder(node.getRight());
+    }
+
+    /**
+     * 后序遍历
+     *
+     * @param node
+     * @author Forest Dong
+     * @date 2024/01/10 19:51
+     */
+    public void postOrder(BinaryTreeNode node) {
+        if (null == node) {
+            return;
+        }
+        // 访问优先级：左子树 -> 根节点 -> 右子树
+        // 遍历左节点
+        postOrder(node.getLeft());
+        // 遍历右节点
+        postOrder(node.getRight());
+        // 逻辑处理
+        process(node);
     }
 
     /**
@@ -63,8 +111,14 @@ public class RecursionDFS {
         BinaryTreeNode node2 = new BinaryTreeNode();
         node2.setValue(2);
         BinaryTreeNode node1= new BinaryTreeNode(1, node3, node2);
-        RecursionDFS dfs = new RecursionDFS();
-        dfs.dfs(node1);
-        System.out.println(dfs.list);
+        RecursionDFS preDfs = new RecursionDFS();
+        preDfs.preOrder(node1);
+        System.out.println("前序遍历" + preDfs.list);
+        RecursionDFS inDfs = new RecursionDFS();
+        inDfs.inOrder(node1);
+        System.out.println("中序遍历" + inDfs.list);
+        RecursionDFS postDfs = new RecursionDFS();
+        postDfs.postOrder(node1);
+        System.out.println("后序遍历" + postDfs.list);
     }
 }

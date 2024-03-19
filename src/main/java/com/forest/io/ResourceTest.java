@@ -39,6 +39,13 @@ public class ResourceTest {
         }
     }
 
+    /**
+     * Jar中读取
+     *
+     * @throws IOException
+     * @author Forest Dong
+     * @date 2024/03/19 11:56
+     */
     public void getResource3() throws IOException {
         InputStream is = this.getClass().getResourceAsStream("/application.yml");
         try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {

@@ -9,12 +9,12 @@ import java.net.UnknownHostException;
  */
 public class WhoAmI {
     public static void main(String[] args) throws UnknownHostException {
-        if (args.length != 1) {
-            System.err.println("Usage: java com.forest.io.WhoAmI whoami");
-            System.exit(1);
-        }
+//        if (args.length != 1) {
+//            System.err.println("Usage: java com.forest.io.WhoAmI whoami");
+//            System.exit(1);
+//        }
         InetAddress a =
-                InetAddress.getByName(args[0]);
+                InetAddress.getByName(null);
         System.out.println(a);
     }
 }

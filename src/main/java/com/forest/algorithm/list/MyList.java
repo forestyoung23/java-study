@@ -1,8 +1,6 @@
 package com.forest.algorithm.list;
 
-import com.sun.jdi.ArrayReference;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 自定义线性表
@@ -19,7 +17,7 @@ public class MyList<T> {
     /**
      * 元素个数
      */
-    private int size;
+    private int length;
 
     private static final Object[] EMPTY_ELEMENTS = {};
 
@@ -54,7 +52,7 @@ public class MyList<T> {
      */
     public void destroy() {
         elements = null;
-        size = 0;
+        length = 0;
     }
 
     /**
@@ -64,10 +62,10 @@ public class MyList<T> {
      * @date 2025/08/18 22:43:06
      */
     public void clear() {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < length; i++) {
             elements[i] = null;
         }
-        size = 0;
+        length = 0;
     }
 
     /**
@@ -79,8 +77,8 @@ public class MyList<T> {
      * @date 2025/08/18 23:07:10
      */
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        if (index < 0 || index >= length) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + length);
         }
         return (T) elements[index];
     }
@@ -104,7 +102,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:14:01
      */
     public T getLast() {
-        return get(size - 1);
+        return get(length - 1);
     }
 
     /**
@@ -116,7 +114,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:06:51
      */
     public int indexOf(T element) {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < length; i++) {
             if (element.equals(elements[i])) {
                 return i;
             }
@@ -132,7 +130,23 @@ public class MyList<T> {
      * @date 2025/08/18 22:44:27
      */
     public void add(T element) {
-        elements[size++] = element;
+        ensureCapacity();
+        elements[length++] = element;
+    }
+
+    /**
+     *
+     *
+     * @return boolean
+     * @author Forest Dong
+     * @date 2025/08/20 22:48:40
+     */
+    public void ensureCapacity() {
+        int arrSize = elements.length;
+        if (length + 1 >= arrSize) {
+            // 扩容
+            elements = Arrays.copyOf(elements, arrSize + (arrSize >> 1));
+        }
     }
 
     /**
@@ -144,14 +158,15 @@ public class MyList<T> {
      * @date 2025/08/18 22:58:00
      */
     public void add(int index, T element) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index > length) {
             throw new IndexOutOfBoundsException();
         }
-        for (int i = size; i > index; i--) {
+        ensureCapacity();
+        for (int i = length; i > index; i--) {
             elements[i] = elements[i - 1];
         }
         elements[index] = element;
-        size++;
+        length++;
     }
 
     /**
@@ -185,13 +200,13 @@ public class MyList<T> {
      * @date 2025/08/18 23:00:33
      */
     public void remove(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= length) {
             throw new IndexOutOfBoundsException();
         }
-        for (int i = index; i < size; i++) {
+        for (int i = index; i < length; i++) {
             elements[i] = elements[i + 1];
         }
-        size--;
+        length--;
     }
 
     /**
@@ -202,7 +217,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:10:12
      */
     public void remove(T element) {
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < length; i++) {
             if (elements[i].equals(element)) {
                 remove(i);
             }
@@ -226,7 +241,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:05:55
      */
     public void removeLast() {
-        remove(size - 1);
+        remove(length - 1);
     }
 
     /**
@@ -237,6 +252,6 @@ public class MyList<T> {
      * @date 2025/08/18 22:50:05
      */
     public int size() {
-        return size;
+        return length;
     }
 }

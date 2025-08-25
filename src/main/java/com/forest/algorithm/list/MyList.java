@@ -1,6 +1,9 @@
 package com.forest.algorithm.list;
 
+import java.rmi.ServerError;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * 自定义线性表
@@ -8,7 +11,7 @@ import java.util.Arrays;
  * @author Forest Dong
  * @date 2025年08月13日 23:23
  */
-public class MyList<T> {
+public class MyList<T> implements Collection<T> {
     /**
      * 元素集合
      */
@@ -17,7 +20,7 @@ public class MyList<T> {
     /**
      * 元素个数
      */
-    private int length;
+    private int size;
 
     private static final Object[] EMPTY_ELEMENTS = {};
 
@@ -30,7 +33,8 @@ public class MyList<T> {
      * @date 2025/08/18 22:43:25
      */
     public MyList() {
-        elements = new Object[DEFAULT_CAPACITY];
+        // 懒加载（节省内存）
+        elements = EMPTY_ELEMENTS;
     }
 
     public MyList(int initialCapacity) {
@@ -52,7 +56,7 @@ public class MyList<T> {
      */
     public void destroy() {
         elements = null;
-        length = 0;
+        size = 0;
     }
 
     /**
@@ -62,10 +66,10 @@ public class MyList<T> {
      * @date 2025/08/18 22:43:06
      */
     public void clear() {
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < size; i++) {
             elements[i] = null;
         }
-        length = 0;
+        size = 0;
     }
 
     /**
@@ -77,8 +81,8 @@ public class MyList<T> {
      * @date 2025/08/18 23:07:10
      */
     public T get(int index) {
-        if (index < 0 || index >= length) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + length);
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
         return (T) elements[index];
     }
@@ -102,7 +106,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:14:01
      */
     public T getLast() {
-        return get(length - 1);
+        return get(size - 1);
     }
 
     /**
@@ -114,7 +118,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:06:51
      */
     public int indexOf(T element) {
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < size; i++) {
             if (element.equals(elements[i])) {
                 return i;
             }
@@ -129,24 +133,44 @@ public class MyList<T> {
      * @author Forest Dong
      * @date 2025/08/18 22:44:27
      */
-    public void add(T element) {
-        ensureCapacity();
-        elements[length++] = element;
+    @Override
+    public boolean add(T element) {
+        if (size == elements.length) {
+            // 数组满则扩容
+            grow(size + 1);
+        }
+        elements[size++] = element;
+        return true;
     }
 
     /**
-     *
-     *
      * @return boolean
      * @author Forest Dong
      * @date 2025/08/20 22:48:40
      */
-    public void ensureCapacity() {
-        int arrSize = elements.length;
-        if (length + 1 >= arrSize) {
-            // 扩容
-            elements = Arrays.copyOf(elements, arrSize + (arrSize >> 1));
+    public Object[] grow(int minCapacity) {
+        int oldCapacity = elements.length;
+        if (0 == oldCapacity) {
+            // 初始化容量
+            elements = new Object[Math.max(minCapacity, DEFAULT_CAPACITY)];
+            return elements;
+        } else  {
+            int newCapacity = newLength(oldCapacity, minCapacity - oldCapacity, oldCapacity >> 1);
+            // 扩容1.5倍
+            elements = Arrays.copyOf(elements, newCapacity);
+            return elements;
         }
+    }
+
+    private static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
+
+    public static int newLength(int oldLength, int minGrowth, int prefGrowth) {
+        int newLength = oldLength + Math.max(minGrowth, prefGrowth);
+        if (newLength - MAX_ARRAY_LENGTH > 0) {
+            if (newLength < 0) throw new OutOfMemoryError();
+            return Integer.MAX_VALUE;
+        }
+        return newLength;
     }
 
     /**
@@ -158,15 +182,17 @@ public class MyList<T> {
      * @date 2025/08/18 22:58:00
      */
     public void add(int index, T element) {
-        if (index < 0 || index > length) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        ensureCapacity();
-        for (int i = length; i > index; i--) {
+        if (size == elements.length) {
+            grow(size + 1);
+        }
+        for (int i = size; i > index; i--) {
             elements[i] = elements[i - 1];
         }
         elements[index] = element;
-        length++;
+        size++;
     }
 
     /**
@@ -191,6 +217,23 @@ public class MyList<T> {
         add(element);
     }
 
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        Object[] a = c.toArray();
+        int numNew = a.length;
+        if (numNew == 0) {
+            return false;
+        }
+        Object[] elements;
+        final int s;
+        if ((s = size) > (elements = this.elements).length - numNew) {
+            elements = grow(s + numNew);
+        }
+        System.arraycopy(a, 0, elements, s, c.size());
+        size = s + numNew;
+        return true;
+    }
+
     /**
      * 删除（指定位置删除）
      *
@@ -200,13 +243,13 @@ public class MyList<T> {
      * @date 2025/08/18 23:00:33
      */
     public void remove(int index) {
-        if (index < 0 || index >= length) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        for (int i = index; i < length; i++) {
+        for (int i = index; i < size; i++) {
             elements[i] = elements[i + 1];
         }
-        length--;
+        size--;
     }
 
     /**
@@ -216,8 +259,8 @@ public class MyList<T> {
      * @author Forest Dong
      * @date 2025/08/18 23:10:12
      */
-    public void remove(T element) {
-        for (int i = 0; i < length; i++) {
+    public void removeEle(T element) {
+        for (int i = 0; i < size; i++) {
             if (elements[i].equals(element)) {
                 remove(i);
             }
@@ -241,7 +284,7 @@ public class MyList<T> {
      * @date 2025/08/18 23:05:55
      */
     public void removeLast() {
-        remove(length - 1);
+        remove(size - 1);
     }
 
     /**
@@ -252,6 +295,51 @@ public class MyList<T> {
      * @date 2025/08/18 22:50:05
      */
     public int size() {
-        return length;
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return Arrays.copyOf(elements, size);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection c) {
+        return false;
+    }
+
+    @Override
+    public Object[] toArray(Object[] a) {
+        return new Object[0];
     }
 }

@@ -1,6 +1,5 @@
 package com.forest.algorithm.list;
 
-import java.rmi.ServerError;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;

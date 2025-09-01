@@ -14,7 +14,7 @@ public class MyList<T> implements Collection<T> {
     /**
      * 元素集合
      */
-    private Object[] elements;
+    private Object[] elementData;
 
     /**
      * 元素个数
@@ -33,14 +33,14 @@ public class MyList<T> implements Collection<T> {
      */
     public MyList() {
         // 懒加载（节省内存）
-        elements = EMPTY_ELEMENTS;
+        elementData = EMPTY_ELEMENTS;
     }
 
     public MyList(int initialCapacity) {
         if (initialCapacity > 0) {
-            elements = new Object[initialCapacity];
+            elementData = new Object[initialCapacity];
         } else if (initialCapacity == 0) {
-            elements = EMPTY_ELEMENTS;
+            elementData = EMPTY_ELEMENTS;
         } else {
             throw new IllegalArgumentException("Illegal Capacity: " +
                     initialCapacity);
@@ -54,7 +54,7 @@ public class MyList<T> implements Collection<T> {
      * @date 2025/08/18 22:42:54
      */
     public void destroy() {
-        elements = null;
+        elementData = null;
         size = 0;
     }
 
@@ -66,7 +66,7 @@ public class MyList<T> implements Collection<T> {
      */
     public void clear() {
         for (int i = 0; i < size; i++) {
-            elements[i] = null;
+            elementData[i] = null;
         }
         size = 0;
     }
@@ -79,11 +79,12 @@ public class MyList<T> implements Collection<T> {
      * @author Forest Dong
      * @date 2025/08/18 23:07:10
      */
+    @SuppressWarnings("unchecked")
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        return (T) elements[index];
+        return (T) elementData[index];
     }
 
     /**
@@ -118,7 +119,7 @@ public class MyList<T> implements Collection<T> {
      */
     public int indexOf(T element) {
         for (int i = 0; i < size; i++) {
-            if (element.equals(elements[i])) {
+            if (element.equals(elementData[i])) {
                 return i;
             }
         }
@@ -134,11 +135,11 @@ public class MyList<T> implements Collection<T> {
      */
     @Override
     public boolean add(T element) {
-        if (size == elements.length) {
+        if (size == elementData.length) {
             // 数组满则扩容
             grow(size + 1);
         }
-        elements[size++] = element;
+        elementData[size++] = element;
         return true;
     }
 
@@ -148,16 +149,16 @@ public class MyList<T> implements Collection<T> {
      * @date 2025/08/20 22:48:40
      */
     public Object[] grow(int minCapacity) {
-        int oldCapacity = elements.length;
+        int oldCapacity = elementData.length;
         if (0 == oldCapacity) {
             // 初始化容量
-            elements = new Object[Math.max(minCapacity, DEFAULT_CAPACITY)];
-            return elements;
+            elementData = new Object[Math.max(minCapacity, DEFAULT_CAPACITY)];
+            return elementData;
         } else  {
             int newCapacity = newLength(oldCapacity, minCapacity - oldCapacity, oldCapacity >> 1);
             // 扩容1.5倍
-            elements = Arrays.copyOf(elements, newCapacity);
-            return elements;
+            elementData = Arrays.copyOf(elementData, newCapacity);
+            return elementData;
         }
     }
 
@@ -184,13 +185,15 @@ public class MyList<T> implements Collection<T> {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
-        if (size == elements.length) {
+        if (size == elementData.length) {
             grow(size + 1);
         }
         for (int i = size; i > index; i--) {
-            elements[i] = elements[i - 1];
+            elementData[i] = elementData[i - 1];
         }
-        elements[index] = element;
+        // 或
+        // System.arraycopy(elements, index, elements, index + 1, size - index);
+        elementData[index] = element;
         size++;
     }
 
@@ -225,7 +228,7 @@ public class MyList<T> implements Collection<T> {
         }
         Object[] elements;
         final int s;
-        if ((s = size) > (elements = this.elements).length - numNew) {
+        if ((s = size) > (elements = this.elementData).length - numNew) {
             elements = grow(s + numNew);
         }
         System.arraycopy(a, 0, elements, s, c.size());
@@ -246,7 +249,7 @@ public class MyList<T> implements Collection<T> {
             throw new IndexOutOfBoundsException();
         }
         for (int i = index; i < size; i++) {
-            elements[i] = elements[i + 1];
+            elementData[i] = elementData[i + 1];
         }
         size--;
     }
@@ -260,7 +263,7 @@ public class MyList<T> implements Collection<T> {
      */
     public void removeEle(T element) {
         for (int i = 0; i < size; i++) {
-            if (elements[i].equals(element)) {
+            if (elementData[i].equals(element)) {
                 remove(i);
             }
         }
@@ -314,7 +317,7 @@ public class MyList<T> implements Collection<T> {
 
     @Override
     public Object[] toArray() {
-        return Arrays.copyOf(elements, size);
+        return Arrays.copyOf(elementData, size);
     }
 
     @Override

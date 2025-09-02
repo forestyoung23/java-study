@@ -5,12 +5,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * 自定义线性表
+ * 自定义顺序表
  *
  * @author Forest Dong
  * @date 2025年08月13日 23:23
  */
-public class MyList<T> implements Collection<T> {
+public class CustomArrayList<T> implements Collection<T> {
     /**
      * 元素集合
      */
@@ -31,12 +31,12 @@ public class MyList<T> implements Collection<T> {
      * @author Forest Dong
      * @date 2025/08/18 22:43:25
      */
-    public MyList() {
+    public CustomArrayList() {
         // 懒加载（节省内存）
         elementData = EMPTY_ELEMENTS;
     }
 
-    public MyList(int initialCapacity) {
+    public CustomArrayList(int initialCapacity) {
         if (initialCapacity > 0) {
             elementData = new Object[initialCapacity];
         } else if (initialCapacity == 0) {

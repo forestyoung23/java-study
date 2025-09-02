@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
  * @author Forest Dong
  * @date 2025年08月20日 22:45
  */
-public class MyListTest {
+public class CustomArrayListTest {
 
     @Test
     public void testAdd() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 0; i < 100; i++) {
             list.add(i);
         }
@@ -21,7 +21,7 @@ public class MyListTest {
 
     @Test
     public void testAddIndex() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 0; i < 10; i++) {
             list.add(i);
         }
@@ -31,7 +31,7 @@ public class MyListTest {
 
     @Test
     void testAddFirst() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 0; i < 100; i++) {
             list.addFirst(i);
         }
@@ -42,7 +42,7 @@ public class MyListTest {
 
     @Test
     void testAddLast() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 0; i < 100; i++) {
             list.addLast(i);
         }
@@ -53,7 +53,7 @@ public class MyListTest {
 
     @Test
     void testGet() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1000; i < 10000; i++) {
             list.addLast(i);
         }
@@ -62,7 +62,7 @@ public class MyListTest {
 
     @Test
     void testGetFirst() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1000; i < 100000; i++) {
             list.addLast(i);
         }
@@ -71,7 +71,7 @@ public class MyListTest {
 
     @Test
     void testGetLast() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 100; i++) {
             list.addLast(i);
         }
@@ -80,7 +80,7 @@ public class MyListTest {
 
     @Test
     void testIndexOf() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 100; i++) {
             list.addLast(i);
         }
@@ -89,7 +89,7 @@ public class MyListTest {
 
     @Test
     void testRemove() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 10; i++) {
             list.add(i);
         }
@@ -99,7 +99,7 @@ public class MyListTest {
 
     @Test
     void testRemoveEle() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 10; i++) {
             list.add(i);
         }
@@ -109,7 +109,7 @@ public class MyListTest {
 
     @Test
     void testRemoveFirst() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 10; i++) {
             list.add(i);
         }
@@ -119,7 +119,7 @@ public class MyListTest {
 
     @Test
     void testRemoveLast() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 10; i++) {
             list.add(i);
         }
@@ -129,7 +129,7 @@ public class MyListTest {
 
     @Test
     void testSize() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         System.err.println(list.size());
         for (int i = 1; i < 100; i++) {
             list.add(i);
@@ -139,7 +139,7 @@ public class MyListTest {
 
     @Test
     void testClear() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 100; i++) {
             list.add(i);
         }
@@ -149,7 +149,7 @@ public class MyListTest {
 
     @Test
     void testDestroy() {
-        MyList<Integer> list = new MyList<>();
+        CustomArrayList<Integer> list = new CustomArrayList<>();
         for (int i = 1; i < 100; i++) {
             list.add(i);
         }
@@ -159,7 +159,7 @@ public class MyListTest {
 
     @Test
     void testAddObject() {
-        MyList<String> list = new MyList<>();
+        CustomArrayList<String> list = new CustomArrayList<>();
         list.add("1");
         list.add("2");
         System.err.println(list);
@@ -167,10 +167,10 @@ public class MyListTest {
 
     @Test
     void testAddAll() {
-        MyList<String> list = new MyList<>();
+        CustomArrayList<String> list = new CustomArrayList<>();
         list.add("1");
         list.add("2");
-        MyList<String> list1 = new MyList<>();
+        CustomArrayList<String> list1 = new CustomArrayList<>();
         list1.add("3");
         list1.add("4");
         list1.add("5");

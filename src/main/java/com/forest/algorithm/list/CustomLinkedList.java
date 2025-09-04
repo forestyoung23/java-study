@@ -7,7 +7,7 @@ package com.forest.algorithm.list;
  * @date 2025年09月02日 20:32
  */
 public class CustomLinkedList<T> {
-    private Node head;
+    private Node<T> head;
 
     private int size;
 
@@ -88,10 +88,16 @@ public class CustomLinkedList<T> {
 
     @Override
     public String toString() {
-        while (head != null) {
-            System.out.println(head.getElement());
-            head = head.getNext();
+        StringBuilder sb = new StringBuilder("[");
+        Node<T> current = head;
+        while (current != null) {
+            sb.append(current.getElement());
+            if (current.getNext() != null) {
+                sb.append(", ");
+            }
+            current = current.getNext();
         }
-        return super.toString();
+        sb.append("]");
+        return sb.toString();
     }
 }

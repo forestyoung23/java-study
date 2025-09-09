@@ -39,4 +39,50 @@ public class CustomLinkedListTest {
         list.add(1, 3);
         System.err.println(list);
     }
+
+    @Test
+    public void testGet() {
+        CustomLinkedList<Integer> list = new CustomLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        System.err.println(list);
+        System.err.println(list.get(2));
+        System.err.println(list.getFirst());
+        System.err.println(list.getLast());
+    }
+
+    @Test
+    public void testRemove() {
+        CustomLinkedList<Integer> list = new CustomLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        System.err.println(list);
+        list.remove(0);
+        System.err.println(list);
+    }
+
+    @Test
+    public void testRemoveEle() {
+        CustomLinkedList<Integer> list = new CustomLinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+        list.add(7);
+        System.err.println(list);
+        list.removeEle(1);
+        System.err.println(list);
+    }
 }

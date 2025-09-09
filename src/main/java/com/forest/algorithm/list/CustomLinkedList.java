@@ -19,7 +19,7 @@ public class CustomLinkedList<T> {
         if (null == head) {
             this.head = node;
         } else {
-            Node last = head;
+            Node<T> last = head;
             while (null != last.next) {
                 last = last.next;
             }
@@ -58,6 +58,65 @@ public class CustomLinkedList<T> {
         node.setNext(targetNode);
         size++;
         return true;
+    }
+
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        Node<T> cur = head;
+        for (int i = 0; i < index; i++) {
+            cur = cur.next;
+        }
+        return cur.getElement();
+    }
+
+    public T getFirst() {
+        return head.getElement();
+    }
+
+    public T getLast() {
+        Node<T> cur = head;
+        while (cur.next != null) {
+            cur = cur.next;
+        }
+        return cur.getElement();
+    }
+
+    public void remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        if (index == 0) {
+            head = head.next;
+        }
+        Node<T> cur = head;
+        for (int i = 0; i < index; i++) {
+            if (i == index - 1) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+    }
+
+    public void removeEle(T element) {
+        Node<T> cur = head;
+        if (cur.element == element) {
+            head = cur.next;
+        }
+        while (cur.next != null) {
+            if (cur.next.element == element) {
+                cur.next = cur.next.next;
+            } else {
+                cur = cur.next;
+            }
+        }
+    }
+
+    public void destory() {
+        head = null;
+        size = 0;
     }
 
     private static class Node<T> {
